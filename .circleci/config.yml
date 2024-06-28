@@ -15,7 +15,9 @@ jobs:
       - cypress/install
 
       - cypress/run-tests:
+        run-dev: npm run dev
         cypress-command: npx cypress run --component --parallel --record
 workflows:
   build:
-    jobs: -cypress-run
+    jobs:
+      - cypress-run
