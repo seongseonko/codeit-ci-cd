@@ -15,8 +15,8 @@ jobs:
       - cypress/install
 
       - cypress/run-tests:
-          cypress-command: 'npx cypress run'
-          start-command: 'wait-on npm run build && npm run start'
+          cypress-command: 'npx cypress run --parallel'
+          start-command: 'npm run build && npm run start'
 workflows:
   build:
     jobs:
