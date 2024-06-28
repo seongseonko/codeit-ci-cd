@@ -12,21 +12,11 @@ jobs:
       name: cypress/default
       node-version: '18.17.0'
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Start server and run tests
-          command:
-            npm run dev &  # 서버를 백그라운드에서 실행
-            # 서버가 준비될 때까지 대기
-            until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
-              printf '.'
-              sleep 1
-            done
-            # Cypress 테스트 실행
-            npx cypress run --component --parallel --record
+      - cypress/install
+
+      - cypress/run-tests:
+          cypress-command: 'npx cypress run --parallel --record'
+          start-command: 'npm run start'
 workflows:
   build:
     jobs:
